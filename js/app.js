@@ -59,7 +59,7 @@ class Player {
   render() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
   }
-
+  // Uses arrow keys to move player and also keeps the player on the canvas.
   handleInput(keyCode) {
     if (keyCode == 'left' && (this.x > 1)) {
       this.x -= 101;
@@ -67,14 +67,17 @@ class Player {
     if (keyCode == 'right' && (this.x < 310)) {
       this.x += 101;
     }
-    if (keyCode == 'up' && (this.y > 100)) {
+    if (keyCode == 'up' && (this.y > 10)) {
       this.y -= 83;
     }
     if (keyCode == 'down' && (this.y < 400)) {
       this.y += 83;
     }
+    // When player gets to the water, player location resets.
+    if (this.y <= 10) {
+      setTimeout(startPos, 500);
+    }
   }
-
 }
 
 // Now instantiate your objects.
@@ -82,6 +85,11 @@ class Player {
 const allEnemies = [];
 // Place the player object in a variable called player
 const player = new Player(200, 404);
+
+function startPos() {
+  player.x = 200;
+  player.y = 404;
+}
 
 
 // This listens for key presses and sends the keys to your
