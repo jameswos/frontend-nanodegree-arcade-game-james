@@ -11,6 +11,8 @@ class Enemy {
     this.x = x;
     this.y = y;
     this.speed = speed;
+    this.width = 90;
+    this.height = 65;
   }
 
   // Update the enemy's position, required method for game
@@ -35,6 +37,8 @@ class Player {
     this.sprite = 'images/char-boy.png';
     this.x = x;
     this.y = y;
+    this.width = 65;
+    this.height = 75;
   }
 
   update() {
@@ -55,10 +59,8 @@ class Player {
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 const allEnemies = [];
-const enemy1 = new Enemy(60, 60, 100);
-allEnemies.push(enemy1);
 // Place the player object in a variable called player
-const player = new Player(10, 10);
+const player = new Player(200, 404);
 
 
 // This listens for key presses and sends the keys to your
