@@ -11,8 +11,8 @@ class Enemy {
     this.x = x;
     this.y = y;
     this.speed = speed;
-    this.width = 90;
-    this.height = 65;
+    this.width = 50;
+    this.height = 60;
   }
 
   // Update the enemy's position, required method for game
@@ -21,6 +21,16 @@ class Enemy {
     // You should multiply any movement by the dt parameter
     // which will ensure the game runs at the same speed for
     // all computers.
+    // Collision detector:
+    for (const buggies of allEnemies) {
+      if ((player.x < buggies.x + buggies.width) &&
+        (player.x + player.width > buggies.x) &&
+        (player.y < buggies.y + buggies.height) &&
+        (player.height + player.y > buggies.y)) {
+        player.x = 200;
+        player.y = 404;
+      }
+    }
   }
 
   // Draw the enemy on the screen, required method for game
@@ -37,8 +47,8 @@ class Player {
     this.sprite = 'images/char-boy.png';
     this.x = x;
     this.y = y;
-    this.width = 65;
-    this.height = 75;
+    this.width = 80;
+    this.height = 80;
   }
 
   update() {
