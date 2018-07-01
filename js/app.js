@@ -60,8 +60,19 @@ class Player {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
   }
 
-  handleInput() {
-
+  handleInput(keyCode) {
+    if (keyCode == 'left' && (this.x > 1)) {
+      this.x -= 101;
+    }
+    if (keyCode == 'right' && (this.x < 310)) {
+      this.x += 101;
+    }
+    if (keyCode == 'up' && (this.y > 100)) {
+      this.y -= 83;
+    }
+    if (keyCode == 'down' && (this.y < 400)) {
+      this.y += 83;
+    }
   }
 
 }
