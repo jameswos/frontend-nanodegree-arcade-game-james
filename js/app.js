@@ -21,14 +21,20 @@ class Enemy {
     // You should multiply any movement by the dt parameter
     // which will ensure the game runs at the same speed for
     // all computers.
+    this.x = this.x + this.speed * dt;
+    // Reset position of the enemy when it reaches the end of the road.
+    if (this.x > 510) {
+      this.x = -60;
+      this.speed = 100 + Math.floor(Math.random() * 20);
+    }
     // Collision detector:
     for (const buggies of allEnemies) {
       if ((player.x < buggies.x + buggies.width) &&
         (player.x + player.width > buggies.x) &&
         (player.y < buggies.y + buggies.height) &&
         (player.height + player.y > buggies.y)) {
-        player.x = 200;
-        player.y = 404;
+        setTimeout(startPos, 200);
+        player.sprite = 'images/char-cat-girl.png';
       }
     }
   }
@@ -47,8 +53,8 @@ class Player {
     this.sprite = 'images/char-boy.png';
     this.x = x;
     this.y = y;
-    this.width = 80;
-    this.height = 80;
+    this.width = 50;
+    this.height = 60;
   }
 
   update() {
@@ -75,6 +81,7 @@ class Player {
     }
     // When player gets to the water, player location resets.
     if (this.y <= 10) {
+      this.sprite = 'images/char-princess-girl.png';
       setTimeout(startPos, 500);
     }
   }
@@ -82,13 +89,22 @@ class Player {
 
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
-const allEnemies = [];
+const allEnemies = [
+  new Enemy(-100, 227, 100),
+  new Enemy(100, 146, 75),
+  new Enemy(0, 62, 200),
+  new Enemy(250, 146, 150),
+  new Enemy(-15, 62, 95)
+];
+
 // Place the player object in a variable called player
 const player = new Player(200, 404);
 
+// Resets player function and sprite
 function startPos() {
   player.x = 200;
   player.y = 404;
+  player.sprite = 'images/char-boy.png';
 }
 
 
