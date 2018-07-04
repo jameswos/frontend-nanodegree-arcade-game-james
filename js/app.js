@@ -29,7 +29,7 @@
         this.x = -60;
         this.speed = 100 + Math.floor(Math.random() * 20);
       }
-      // Collision detector:
+      // Collision detector adapted from https://developer.mozilla.org/en-US/docs/Games/Techniques/2D_collision_detection
       for (const buggies of allEnemies) {
         if ((player.x < buggies.x + buggies.width) &&
           (player.x + player.width > buggies.x) &&
