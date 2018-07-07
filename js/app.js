@@ -28,14 +28,12 @@ class Enemy {
       this.speed = 100 + Math.floor(Math.random() * 20);
     }
     // Collision detector adapted from https://developer.mozilla.org/en-US/docs/Games/Techniques/2D_collision_detection
-    for (const buggies of allEnemies) {
-      if ((player.x < buggies.x + buggies.width) &&
-        (player.x + player.width > buggies.x) &&
-        (player.y < buggies.y + buggies.height) &&
-        (player.height + player.y > buggies.y)) {
-        setTimeout(startPos, 200);
-        player.sprite = 'images/char-cat-girl.png';
-      }
+    if ((player.x < this.x + this.width) &&
+      (player.x + player.width > this.x) &&
+      (player.y < this.y + this.height) &&
+      (player.height + player.y > this.y)) {
+      setTimeout(startPos, 200);
+      player.sprite = 'images/char-cat-girl.png';
     }
   }
 
