@@ -81,7 +81,7 @@ class Player extends Character {
       // Resets player position and sprite
       setTimeout(function() {
         location.reload();
-      }, 500);
+      }, 600);
     }
   }
 }
