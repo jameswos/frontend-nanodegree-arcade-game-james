@@ -1,18 +1,24 @@
 /*jshint esversion: 6 */
-// Enemies our player must avoid
-class Enemy {
-  // Variables applied to each of our instances go here,
-  // we've provided one for you to get started
-
-  // The image/sprite for our enemies, this uses
-  // a helper we've provided to easily load images
-  constructor(x, y, speed) {
-    this.sprite = 'images/enemy-bug.png';
+class Character {
+  constructor(x, y) {
     this.x = x;
     this.y = y;
-    this.speed = speed;
     this.width = 50;
     this.height = 60;
+  }
+
+  render() {
+    ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+  }
+
+}
+
+// Enemies our player must avoid
+class Enemy extends Character {
+  constructor(x, y, speed) {
+    super(x, y);
+    this.sprite = 'images/enemy-bug.png';
+    this.speed = speed;
   }
 
   // Update the enemy's position, required method for game
@@ -32,37 +38,29 @@ class Enemy {
       (player.x + player.width > this.x) &&
       (player.y < this.y + this.height) &&
       (player.height + player.y > this.y)) {
-      setTimeout(startPos, 200);
+      setTimeout(function() {
+        player.x = 200;
+        player.y = 404;
+        player.sprite = 'images/char-boy.png';
+      }, 200);
       player.sprite = 'images/char-cat-girl.png';
     }
-  }
-
-  // Draw the enemy on the screen, required method for game
-  render() {
-    ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
   }
 }
 
 // Now write your own player class
 // This class requires an update(), render() and
 // a handleInput() method.
-class Player {
+class Player extends Character {
   constructor(x, y) {
+    super(x, y);
     this.sprite = 'images/char-boy.png';
-    this.x = x;
-    this.y = y;
-    this.width = 50;
-    this.height = 60;
   }
 
   update() {
 
   }
 
-  // Draw player on screen
-  render() {
-    ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
-  }
   // Uses arrow keys to move player and also keeps the player on the canvas.
   handleInput(keyCode) {
     if (keyCode == 'left' && (this.x > 1)) {
@@ -80,7 +78,10 @@ class Player {
     // When player gets to the water, player location resets.
     if (this.y <= 10) {
       this.sprite = 'images/char-princess-girl.png';
-      setTimeout(startPos, 500);
+      // Resets player position and sprite
+      setTimeout(function() {
+        location.reload();
+      }, 500);
     }
   }
 }
@@ -97,13 +98,6 @@ const allEnemies = [
 
 // Place the player object in a variable called player
 const player = new Player(200, 404);
-
-// Resets player function and sprite
-function startPos() {
-  player.x = 200;
-  player.y = 404;
-  player.sprite = 'images/char-boy.png';
-}
 
 
 // This listens for key presses and sends the keys to your
